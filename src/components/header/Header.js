@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import firebase from '../../firebase/firebase';
+import Firebase from '../../firebase/firebase';
 
-const auth = firebase.auth();
+const auth = Firebase.instance().auth;
 
 class Header extends Component {
 
@@ -17,7 +17,6 @@ class Header extends Component {
   async logout() {
     try {
       await auth.signOut();
-      // TODO: nav to home?
     } catch (err) {
       console.log(err);
     }

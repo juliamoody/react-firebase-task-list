@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './App.css';
 
-import firebase from './firebase/firebase';
+import Firebase from './firebase/firebase';
 
 import Header from './components/header/Header';
 import Home from './components/Home';
@@ -16,6 +16,7 @@ import TaskList from './components/task-list/TaskList';
 import GuardedRoute from './components/routing/GuardedRoute';
 import PropsRoute from './components/routing/PropsRoute';
 
+const auth = Firebase.instance().auth;
 
 class App extends Component {
 
@@ -26,12 +27,10 @@ class App extends Component {
       user: null,
       loading: true
     };
-    this.db = firebase.firestore();
-    this.auth = firebase.auth();
   }
 
   componentDidMount() {
-    this.auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
       this.setState({ user, loading: false });
     });
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
-import firebase from '../firebase/firebase';
+import Firebase from '../firebase/firebase';
+const auth = Firebase.instance().auth;
 
 export default class Register extends Component {
 
@@ -10,8 +11,6 @@ export default class Register extends Component {
     if (this.props.user) {
       this.props.history.push('/');
     }
-
-    this.auth = firebase.auth();
 
     this.state = {
       email: '',
@@ -36,7 +35,7 @@ export default class Register extends Component {
 
     try {
       const { email, password } = this.state;
-      await this.auth.createUserWithEmailAndPassword(email, password);
+      await auth.createUserWithEmailAndPassword(email, password);
 
       this.props.history.push('/');
     } catch (err) {

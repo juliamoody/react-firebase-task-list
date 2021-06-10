@@ -1,20 +1,22 @@
 import React, { Component } from 'react'
 
 import './TaskList.css';
-import firebase from '../../firebase/firebase';
+import Firebase from '../../firebase/firebase';
 
 import TaskForm from './TaskForm';
 import TaskTable from './TaskTable';
 import Task from '../../models/task';
 
-const db = firebase.firestore();
+const db = Firebase.instance().db;
 
 export default class TaskList extends Component {
 
   constructor(props) {
     super(props);
 
-    // TODO: CHECK WE HAVE A USER
+    if (!this.props.user) {
+      this.props.history.push('/login');
+    }
 
     this.state = {
       tasks: [],
